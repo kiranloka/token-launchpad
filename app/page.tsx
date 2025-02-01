@@ -25,32 +25,48 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const handleSubmit=async()=>{
-  const inputElement=document.querySelector('input[type="file"]') as HTMLInputElement;
-  if(!inputElement?.files?.length){
+const handleSubmit = async () => {
+  const inputElement = document.querySelector(
+    'input[type="file"]',
+  ) as HTMLInputElement;
+  if (!inputElement?.files?.length) {
     alert("please upload a file!");
     return;
   }
 
-  const formData=new FormData();
-  formData.append("name",(document.getElementById("outlined-name") as HTMLInputElement).value);
-       formData.append("symbol",(document.getElementById("outlined-symbol") as HTMLInputElement).value);
- formData.append("decimal",(document.getElementById("outlined-decimal") as HTMLInputElement).value);
- formData.append("supply",(document.getElementById("outlined-supply") as HTMLInputElement).value);
- formData.append("description",(document.getElementById("outlined-description") as HTMLInputElement).value);
- formData.append("file",inputElement.files[0]);
-    try{
-    const response=await fetch("/api/route",{
-    method:"POST",
-      body:formData
+  const formData = new FormData();
+  formData.append(
+    "name",
+    (document.getElementById("outlined-name") as HTMLInputElement).value,
+  );
+  formData.append(
+    "symbol",
+    (document.getElementById("outlined-symbol") as HTMLInputElement).value,
+  );
+  formData.append(
+    "decimal",
+    (document.getElementById("outlined-decimal") as HTMLInputElement).value,
+  );
+  formData.append(
+    "supply",
+    (document.getElementById("outlined-supply") as HTMLInputElement).value,
+  );
+  formData.append(
+    "description",
+    (document.getElementById("outlined-description") as HTMLInputElement).value,
+  );
+  formData.append("file", inputElement.files[0]);
+  try {
+    const response = await fetch("/api/route", {
+      method: "POST",
+      body: formData,
     });
-    const data=await response.json();
-    console.log("Uploaded response: ",data);
-
-    }catch(error){
-    console.log("Error: ",error);
-    }
-}
+    const data = await response.json();
+    console.log("Uploaded response: ", data);
+  } catch (error) {
+    console.log("Error: ", error);
+  }
+};
 
 export default function Home() {
   const [filesUploaded, setFilesUploaded] = useState(false);
@@ -243,7 +259,9 @@ export default function Home() {
                 variant="contained"
                 color="primary"
                 className="bg-green-600 text-white"
-                onClick={() =>{handleSubmit} 
+                onClick={() => {
+                  handleSubmit;
+                }}
               >
                 Create Token
               </Button>
